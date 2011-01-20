@@ -90,6 +90,8 @@ abstract class Kohana_Session {
 			// Write the session at shutdown
 			register_shutdown_function(array($session, 'write'));
 		}
+		else if(isset($id)&&Session::$instances[$type]->id()!==$id)
+			throw Kohana_Exception("You can't change session IDs half way through execution");
 
 		return Session::$instances[$type];
 	}
